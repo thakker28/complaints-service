@@ -1,0 +1,25 @@
+server:
+  port: 9095
+
+spring:
+  profiles:
+    active: ${DEPLOY_ENV:local}
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:complaint-service
+    driverClassName: org.h2.Driver
+    username: prateek
+    password: thakker
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      defer-datasource-initialization: true
+
+
+getUserDetailsEndpoint: http://onboarding-service:8080/users/v1/individual/
+serviceProviderEndpoint: http://service-manager:8080/v1/serviceProvider/
+getAdminDetailsEndpoint: http://onboarding-service:8080/users/v1/admin/
+kafka.bootstrapAddress: kafka-service:9092
+retryTopicName: test-topic-retry
+webClientTimeoutSeconds: 2

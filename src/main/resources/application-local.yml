@@ -1,0 +1,27 @@
+server:
+  port: 9095
+
+spring:
+  cache:
+    type: redis
+#  r2dbc:
+#    url:  r2dbc:h2:mem:complaint-service
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:complaint-service
+    driverClassName: org.h2.Driver
+    username: prateek
+    password: thakker
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      defer-datasource-initialization: true
+
+
+getUserDetailsEndpoint: http://localhost:9090/users/v1/individual/
+serviceProviderEndpoint: http://localhost:9096/v1/serviceProvider/
+getAdminDetailsEndpoint: http://localhost:9090/users/v1/admin/
+kafka.bootstrapAddress: localhost:9092
+retryTopicName: test-topic-retry
+webClientTimeoutSeconds: 2
