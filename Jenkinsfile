@@ -9,7 +9,7 @@ pipeline{
     stages{
         stage("Build Package"){
             steps{
-            
+            echo "PATH - $PATH"
                 sh "mvn --version"
                 sh "mvn clean install -DskipTests"
             }
