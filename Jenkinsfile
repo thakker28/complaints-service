@@ -34,7 +34,7 @@ pipeline{
             
             steps{
 		script{
-			docker.withRegistry('gcr.io/burner-prathakk/', 'gcpCred') {
+			docker.withRegistry('https://gcr.io', 'gcr:gcpCred') {
 			dockerImage.push();
 			dockerImage.push('latest');
 		}
