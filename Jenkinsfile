@@ -9,7 +9,7 @@ pipeline{
     stages{
         stage("Build Package"){
             steps{
-             echo "Build"
+            
                 sh 'mvn --version'
                 sh 'mvn clean install -DskipTests'
             }
@@ -17,14 +17,14 @@ pipeline{
 
         stage("Unit Test"){
             steps{
-            echo "Running Unit Tests"
+           
                 sh 'mvn clean test'
             }
         }
 
         stage("Docker Image"){
             steps{
-            echo "Building Docker Image"
+            
                 script{
                     docker.build("complaints-service:${env.BUILD_TAG}")
                     }
@@ -34,7 +34,7 @@ pipeline{
         stage("Push Image"){
             
             steps{
-	    echo "pushing the image to container registry"
+	   
             sh 'docker push  gcr.io/burner-prathakk1/complaints-service:${env.BUILD_TAG}'
             }
         }
