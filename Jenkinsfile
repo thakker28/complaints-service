@@ -32,8 +32,9 @@ pipeline{
         }
 
         stage("Push Image"){
-            echo "pushing the image to container registry"
+            
             steps{
+	    echo "pushing the image to container registry"
             sh 'docker push  gcr.io/burner-prathakk1/complaints-service:${env.BUILD_TAG}'
             }
         }
