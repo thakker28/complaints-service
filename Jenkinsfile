@@ -24,9 +24,8 @@ pipeline{
 
         stage("Docker Image"){
             steps{
-            // sh "docker build -t complaints-service:${env.BUILD_TAG} ."
                 script{
-                    docker.build("complaints-service:${env.BUILD_TAG}")
+                  dockerImage = docker.build("complaints-service:${env.BUILD_TAG}")
                     }
             }
         }
@@ -34,8 +33,11 @@ pipeline{
         stage("Push Image"){
             
             steps{
-	   
-            sh "docker push  gcr.io/burner-prathakk1/complaints-service:${env.BUILD_TAG}"
+		script{
+			docker.withRegistry('gcr.io/burner-prathakk/', 'gcpCred') {
+			dockerImage.push();
+			dockerImage.push('latest');
+		}
             }
         }
     }
