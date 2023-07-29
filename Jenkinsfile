@@ -1,27 +1,40 @@
 pipeline{
     agent any
+    environment {
+		dockerHome = tool 'docker'
+		mavenHome = tool 'maven'
+		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+	}
+    
     stages{
         stage("Build Package"){
             steps{
              echo "Build"
+                sh 'mvn --version'
+                sh 'mvn clean install -DskipTests'
             }
         }
 
         stage("Unit Test"){
             steps{
-            echo "Unit Tests"
+            echo "Running Unit Tests"
+                sh 'mvn clean test'
             }
         }
 
         stage("Docker Image"){
             steps{
-            echo "Building Image"
+            echo "Building Docker Image"
+                script{
+                    docker.build("complaints-service:${env.BUILD_TAG}")
+                    }
             }
         }
 
         stage("Push Image"){
+            echo "pushing the image to container registry"
             steps{
-            echo "Image pushed"
+            sh 'docker push  gcr.io/burner-prathakk1/complaints-service:${env.BUILD_TAG}'
             }
         }
     }
