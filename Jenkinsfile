@@ -10,15 +10,15 @@ pipeline{
         stage("Build Package"){
             steps{
             
-                sh 'mvn --version'
-                sh 'mvn clean install -DskipTests'
+                // sh "mvn --version"
+                sh "mvn clean install -DskipTests"
             }
         }
 
         stage("Unit Test"){
             steps{
            
-                sh 'mvn clean test'
+                sh "mvn clean test'"
             }
         }
 
@@ -35,7 +35,7 @@ pipeline{
             
             steps{
 	   
-            sh 'docker push  gcr.io/burner-prathakk1/complaints-service:${env.BUILD_TAG}'
+            sh "docker push  gcr.io/burner-prathakk1/complaints-service:${env.BUILD_TAG}"
             }
         }
     }
