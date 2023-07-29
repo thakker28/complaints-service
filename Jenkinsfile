@@ -25,7 +25,7 @@ pipeline{
         stage("Docker Image"){
             steps{
                 script{
-                  dockerImage = docker.build("complaints-service:${env.BUILD_TAG}")
+                  dockerImage = docker.build("burner-prathakk1/complaints-service:${env.BUILD_TAG}")
                     }
             }
         }
