@@ -10,7 +10,7 @@ pipeline{
         stage("Build Package"){
             steps{
             
-                // sh "mvn --version"
+                sh "mvn --version"
                 sh "mvn clean install -DskipTests"
             }
         }
@@ -18,7 +18,7 @@ pipeline{
         stage("Unit Test"){
             steps{
            
-                sh "mvn clean test'"
+                sh "mvn clean test"
             }
         }
 
