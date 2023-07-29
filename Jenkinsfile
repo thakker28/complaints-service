@@ -24,10 +24,10 @@ pipeline{
 
         stage("Docker Image"){
             steps{
-            
-                script{
-                    docker.build("complaints-service:${env.BUILD_TAG}")
-                    }
+            sh "docker build -t complaints-service:${env.BUILD_TAG}"
+                // script{
+                //     docker.build("complaints-service:${env.BUILD_TAG}")
+                //     }
             }
         }
 
